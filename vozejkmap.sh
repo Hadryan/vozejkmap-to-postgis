@@ -19,10 +19,13 @@ then
     then
         wget http://www.vozejkmap.cz/opendata/locations.json -O /tmp/locations.json
         sed -i 's/\},{/\n},{/g' /tmp/locations.json
+        echo -en "$(cat /tmp/locations.json)"
     fi
 else
     wget http://www.vozejkmap.cz/opendata/locations.json -O /tmp/locations.json
     sed -i 's/\},{/\n},{/g' /tmp/locations.json
+    echo -en "$(cat /tmp/locations.json)"
+
 fi
 
 psql -h localhost -U $USER -d $DB -f vozejkmap.sql
