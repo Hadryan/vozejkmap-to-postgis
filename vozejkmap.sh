@@ -8,9 +8,9 @@
 #bash_version    :4.3.11(1)-release
 #==============================================================================
 
-echo "Database username:"
+echo -n "Database username:"
 read USER
-echo "Database:"
+echo -n "Database:"
 read DB
 
 if [ -f /tmp/locations.json ]
