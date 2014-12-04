@@ -13,19 +13,18 @@ read USER
 echo -n "Database:"
 read DB
 
-if [ -f /tmp/locations.json ]
+if [ -f /tmp/locations.json ] # file exists
 then
-    if test `find "/tmp/locations.json" -mmin +1440`
+    if test `find "/tmp/locations.json" -mmin +1440` # file is older than 1 day
     then
         wget http://www.vozejkmap.cz/opendata/locations.json -O /tmp/locations.json
         sed -i 's/\},{/\n},{/g' /tmp/locations.json
-        echo -en "$(cat /tmp/locations.json)"
+        echo -en "$(cat /tmp/locations.json)" > /tmp/locations.json
     fi
-else
+else # file does not eixst
     wget http://www.vozejkmap.cz/opendata/locations.json -O /tmp/locations.json
     sed -i 's/\},{/\n},{/g' /tmp/locations.json
-    echo -en "$(cat /tmp/locations.json)"
-
+    echo -en "$(cat /tmp/locations.json)" > /tmp/locations.json
 fi
 
 psql -h localhost -U $USER -d $DB -f vozejkmap.sql

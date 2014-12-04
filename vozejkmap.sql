@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS vozejkmap CASCADE;
 CREATE SCHEMA vozejkmap;
 
 SET search_path=vozejkmap,public;
