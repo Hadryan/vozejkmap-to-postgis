@@ -16,6 +16,12 @@ var M = (function(my) { "use strict";
     });
 
     json = L.geoJson(data, {
+        onEachFeature: function(feature, layer) {
+            layer.bindPopup(L.Util.template("<h1>{title}</h1><p>{description}</p>", {
+                title: feature.properties.title,
+                description: feature.properties.description
+            }));
+        },
         pointToLayer: function(feature, position) {
             var style = {
                 "color": "#444",
