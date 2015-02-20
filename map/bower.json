@@ -1,0 +1,21 @@
+{
+  "name": "Leaflet vozejkmap.cz map",
+  "version": "0.0.0",
+  "homepage": "https://github.com/zimmicz/vozejkmap-to-postgis",
+  "authors": [
+    "Michal Zimmermann <zimmicz@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet": "~0.7.3",
+    "normalize.css": "~3.0.2"
+  }
+}
