@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "leaflet": "~0.7.3",
-    "normalize.css": "~3.0.2"
+    "normalize.css": "~3.0.2",
+    "leaflet.markerclusterer": "~0.4.0"
   }
 }

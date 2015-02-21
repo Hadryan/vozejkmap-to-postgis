@@ -1,11 +1,11 @@
 var M = (function(my) { "use strict";
-    var basemap,
+    var basemap, cluster,
         colors = [
             "#B02B2C", "#6BBA70", "#3F4C6B", "#356AA0", "#D01F3C", "#73880A",
             "#C79810", "magenta", "grey", "ivory", "pink", "maroon", "navy"
         ],
         json, map, styles, vozejkmap;
-    my.version = "0.0.1";
+    my.version = "0.0.2";
 
     basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
 
@@ -34,7 +34,9 @@ var M = (function(my) { "use strict";
             return L.circleMarker(position, style);
         }
     });
-    json.addTo(map);
+
+    cluster = L.markerClusterGroup();
+    cluster.addLayer(json).addTo(map);
 
     return my;
 })({});
