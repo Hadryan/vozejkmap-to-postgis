@@ -1,5 +1,5 @@
 var M = (function(my) { "use strict";
-    var basemap, cluster, json, map, styles, vozejkmap;
+    var basemap, cluster, json, map, styles;
     my.version = "0.0.3";
 
     basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
@@ -94,7 +94,10 @@ var M = (function(my) { "use strict";
         }
     });
 
-    cluster = L.markerClusterGroup();
+    cluster = L.markerClusterGroup({
+        chunkedLoading: true,
+        chunkInterval: 500
+    });
     cluster.addLayer(json).addTo(map);
 
     return my;
