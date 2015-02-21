@@ -12,6 +12,8 @@ echo -n "Database username:"
 read USER
 echo -n "Database:"
 read DB
+echo -n "Output path:"
+read OUT
 
 if [ -f /tmp/locations.json ] # file exists
 then
@@ -27,4 +29,19 @@ else # file does not eixst
     echo -en "$(cat /tmp/locations.json)" > /tmp/locations.json
 fi
 
-psql -h localhost -U $USER -d $DB -f vozejkmap.sql
+touch $OUT/data.json
+psql   -h localhost -U $USER -d $DB -f vozejkmap.sql
+psql -tA -h localhost -U $USER -d $DB -c "SELECT row_to_json(fc)
+ FROM (
+    SELECT 'FeatureCollection' AS type,
+        array_to_json(array_agg(f)) AS features
+        FROM (SELECT 'Feature' AS type,
+            ST_AsGeoJSON(lg.geom)::json As geometry,
+            row_to_json((SELECT l FROM (SELECT id, title, location_type, description, author_name, attr1, attr2, attr3) AS l
+      )) AS properties
+   FROM vozejkmap.vozejkmap AS lg ) AS f )  AS fc" | cat - > $OUT/data.json
+
+echo "var data = " > ./map/data/temp
+cat ./map/data/data.json >> ./map/data/temp
+rm -rf ./map/data/data.json
+mv ./map/data/temp ./map/data/data.json
