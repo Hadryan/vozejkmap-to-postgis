@@ -112,6 +112,7 @@ INSERT INTO location_type VALUES(11, 'Obchod');
 INSERT INTO location_type VALUES(12, 'Banka, bankomat');
 INSERT INTO location_type VALUES(13, 'Parkoviště');
 INSERT INTO location_type VALUES(14, 'Prodejní a servisní místa Škoda Auto');
+INSERT INTO location_type VALUES(15, 'Neznámý');
 
 
 DROP TABLE vozejkmap_raw;
