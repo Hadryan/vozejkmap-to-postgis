@@ -7,14 +7,30 @@
 #usage           :bash vozejkmap.sh
 #bash_version    :4.3.11(1)-release
 #==============================================================================
-echo -n "API key (contact info@coex.cz if you don't have one):"
-read KEY
-echo -n "Database username:"
-read USER
-echo -n "Database:"
-read DB
-echo -n "Output path:"
-read OUT
+SETTINGS=.settings
+
+if [[ ! -f .settings ]]; then
+    touch $SETTINGS
+
+    echo -n "API key (contact info@coex.cz if you don't have one):"
+    read KEY
+    echo KEY=$KEY > $SETTINGS
+
+    echo -n "Database username:"
+    read USER
+    echo USER=$USER >> $SETTINGS
+
+    echo -n "Database:"
+    read DB
+    echo DB=$DB >> $SETTINGS
+
+    echo -n "Output path:"
+    read OUT
+    echo OUT=$OUT >> $SETTINGS
+else
+    source $SETTINGS
+    echo $USER
+fi
 
 if [ -f /tmp/locations.json ] # file exists
 then
