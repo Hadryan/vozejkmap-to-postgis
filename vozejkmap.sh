@@ -7,7 +7,8 @@
 #usage           :bash vozejkmap.sh
 #bash_version    :4.3.11(1)-release
 #==============================================================================
-
+echo -n "API key (contact info@coex.cz if you don't have one):"
+read KEY
 echo -n "Database username:"
 read USER
 echo -n "Database:"
@@ -24,7 +25,7 @@ then
         echo -en "$(cat /tmp/locations.json)" > /tmp/locations.json
     fi
 else # file does not eixst
-    wget http://www.vozejkmap.cz/opendata/locations.json -O /tmp/locations.json
+    wget http://www.vozejkmap.cz/opendata/locations.json?key=$KEY -O /tmp/locations.json
     sed -i 's/\},{/\n},{/g' /tmp/locations.json
     echo -en "$(cat /tmp/locations.json)" > /tmp/locations.json
 fi
@@ -41,7 +42,7 @@ psql -tA -h localhost -U $USER -d $DB -c "SELECT row_to_json(fc)
       )) AS properties
    FROM vozejkmap.vozejkmap AS lg ) AS f )  AS fc" | cat - > $OUT/data.json
 
-echo "var data = " > ./map/data/temp
-cat ./map/data/data.json >> ./map/data/temp
-rm -rf ./map/data/data.json
+echo "var data = " | tr -d "\n" > ./map/data/temp
+cat $OUT/data.json >> ./map/data/temp
+rm -rf $OUT/data.json
 mv ./map/data/temp ./map/data/data.json
