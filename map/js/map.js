@@ -1,5 +1,5 @@
 var M = (function(my) { "use strict";
-    var basemap, categories = {}, cluster, json, map, styles, mapkey, overlays = {};
+    var basemap, categories = {}, cluster, json, map, mapkey, overlays = {};
     my.version = "1.0";
 
     basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
@@ -14,13 +14,15 @@ var M = (function(my) { "use strict";
         onEachFeature: function(feature, layer) {
             layer.on("click", function(e) {
                 var nearest = turf.nearest(layer.toGeoJSON(), turf.remove(data, "title", feature.properties.title)),
+                    distance = turf.distance(layer.toGeoJSON(), nearest, "kilometers").toPrecision(2),
                     popup = L.popup({offset: [0, -35]}).setLatLng(e.latlng),
                     content = L.Util.template(
                         "<h1>{title}</h1><p>{description}</p> \
-                        <p>Nejbližší bod: {nearest}</p>", {
+                        <p>Nejbližší bod: {nearest} je {distance} km daleko.</p>", {
                         title: feature.properties.title,
                         description: feature.properties.description,
-                        nearest: nearest.properties.title
+                        nearest: nearest.properties.title,
+                        distance: distance
                     });
 
                 popup.setContent(content);
