@@ -1,0 +1,15 @@
+{
+  "name": "vozejkmap-leaflet",
+  "version": "0.0.3",
+  "author": "zimmicz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zimmicz/vozejkmap-to-postgis"
+  },
+  "dependencies": {
+    "drmonty-leaflet-awesome-markers": "^2.0.2",
+    "leaflet": "^0.7.7",
+    "leaflet.markercluster": "git+https://github.com/Leaflet/Leaflet.markercluster.git",
+    "normalize.css": "^3.0.3"
+  }
+}
