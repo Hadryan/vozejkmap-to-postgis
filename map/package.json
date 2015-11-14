@@ -11,5 +11,11 @@
     "leaflet": "^0.7.7",
     "leaflet.markercluster": "git+https://github.com/Leaflet/Leaflet.markercluster.git",
     "normalize.css": "^3.0.3"
+  },
+  "devDependencies": {
+    "napa": "^2.0.2"
+  },
+  "scripts": {
+    "install": "napa ghybs/Leaflet.FeatureGroup.SubGroup"
   }
 }
