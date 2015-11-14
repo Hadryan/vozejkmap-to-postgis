@@ -1,6 +1,6 @@
 {
   "name": "vozejkmap-leaflet",
-  "version": "1.0",
+  "version": "1.0.0",
   "author": "zimmicz",
   "repository": {
     "type": "git",
@@ -10,7 +10,8 @@
     "drmonty-leaflet-awesome-markers": "^2.0.2",
     "leaflet": "^0.7.7",
     "leaflet.markercluster": "git+https://github.com/Leaflet/Leaflet.markercluster.git",
-    "normalize.css": "^3.0.3"
+    "normalize.css": "^3.0.3",
+    "turf": "^2.0.2"
   },
   "devDependencies": {
     "napa": "^2.0.2"
