@@ -12,10 +12,20 @@ var M = (function(my) { "use strict";
 
     json = L.geoJson(data, {
         onEachFeature: function(feature, layer) {
-            layer.bindPopup(L.Util.template("<h1>{title}</h1><p>{description}</p>", {
-                title: feature.properties.title,
-                description: feature.properties.description
-            }));
+            layer.on("click", function(e) {
+                var nearest = turf.nearest(layer.toGeoJSON(), turf.remove(data, "title", feature.properties.title)),
+                    popup = L.popup({offset: [0, -35]}).setLatLng(e.latlng),
+                    content = L.Util.template(
+                        "<h1>{title}</h1><p>{description}</p> \
+                        <p>Nejbližší bod: {nearest}</p>", {
+                        title: feature.properties.title,
+                        description: feature.properties.description,
+                        nearest: nearest.properties.title
+                    });
+
+                popup.setContent(content);
+                popup.openOn(map);
+            });
 
             category = feature.properties.location_type;
 
@@ -25,6 +35,7 @@ var M = (function(my) { "use strict";
 
             categories[category].push(layer);
         },
+
         pointToLayer: function(feature, position) {
             return L.marker(position, {icon: L.AwesomeMarkers.icon(my.Style.set(feature.properties.location_type))});
         }
