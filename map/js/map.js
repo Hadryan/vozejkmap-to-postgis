@@ -1,6 +1,6 @@
 var M = (function(my) { "use strict";
     var basemap, categories = {}, cluster, json, map, styles, mapkey, overlays = {};
-    my.version = "0.0.3";
+    my.version = "1.0";
 
     basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
 
