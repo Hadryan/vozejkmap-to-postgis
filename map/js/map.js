@@ -10,6 +10,28 @@ var M = (function(my) { "use strict";
         zoom: 8,
     });
 
+    // try to locate the user
+    map.locate({
+        setView: true,
+        enableHighAccuracy: true
+    });
+
+    map.on("locationfound", function(e) {
+        // gps accuracy
+        L.circle(e.latlng, e.accuracy, {
+            fillColor: "#4096EE",
+            fillOpacity: 0.1,
+            weight: 1
+        }).addTo(map);
+
+        // gps location
+        L.circleMarker(e.latlng, {
+            fillColor: "#4096EE",
+            fillOpacity: 1,
+            weight: 1
+        }).setRadius(5).addTo(map);
+    });
+
     json = L.geoJson(data, {
         onEachFeature: function(feature, layer) {
             layer.on("click", function(e) {
