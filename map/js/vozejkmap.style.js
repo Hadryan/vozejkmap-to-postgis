@@ -7,10 +7,10 @@ var M = (function(my) {"use strict";
 
         styles: {
             "default": {
-                "icon": "",
+                "icon": "ion-help",
                 "markerColor": "blue",
-                "prefix": "",
-                "type": "Neznámý"
+                "prefix": "ion",
+                "type": "<i class='ion ion-help'></i>Neznámý"
             },
             "1": { // culture
                 "icon": "video-camera",
@@ -20,7 +20,7 @@ var M = (function(my) {"use strict";
             },
             "2": { // sports
                 "icon": "ios7-football",
-                "markerColor": "darkgreen",
+                "markerColor": "green",
                 "prefix": "ion",
                 "type": "<i class='ion ion-ios7-football'></i>Sport"
             },
@@ -38,6 +38,7 @@ var M = (function(my) {"use strict";
             },
             "5": { // acommodation
                 "icon": "bed",
+                "markerColor": "orange",
                 "prefix": "fa",
                 "type": "<i class='fa fa-bed'></i>Ubytování"
             },
@@ -84,16 +85,16 @@ var M = (function(my) {"use strict";
                 "type": "<i class='ion ion-social-usd'></i>Banka, bankomat"
             },
             "13": { // parking lots
-                "icon": "heart",
-                "markerColor": "gray",
-                "prefix": "ion",
-                "type": "<i class='ion ion-heart'></i>Parkoviště"
-            },
-            "14": { // Škoda auto (wtf?!)
                 "icon": "car",
                 "markerColor": "gray",
                 "prefix": "fa",
-                "type": "<i class='fa fa-car'></i>Škoda Auto"
+                "type": "<i class='fa fa-car'></i>Parkoviště"
+            },
+            "14": { // Škoda auto (wtf?!)
+                "icon": "model-s",
+                "markerColor": "gray",
+                "prefix": "ion",
+                "type": "<i class='ion ion-model-s'></i>Škoda Auto"
             }
         }
     }

@@ -44,15 +44,21 @@ var M = (function(my) { "use strict";
     });
 
     cluster = L.markerClusterGroup({
+        disableClusteringAtZoom: 16,
         chunkedLoading: true,
-        chunkInterval: 500
+        chunkInterval: 500,
+        polygonOptions: {
+            color: "#FF1A00",
+            weight: 1
+        }
     });
-
-    cluster.addTo(map);
 
     for (var category in categories) {
         overlays[my.Style.set(category).type] = L.featureGroup.subGroup(cluster, categories[category]);
+        overlays[my.Style.set(category).type].addTo(map);
     }
+
+    cluster.addTo(map);
 
     mapkey = L.control.layers(null, overlays).addTo(map);
 
