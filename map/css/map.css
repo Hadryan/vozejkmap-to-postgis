@@ -10,3 +10,39 @@ html, body {
 .leaflet-control-layers-list label i {
     padding-right: 5px;
 }
+
+.vozejkmap-infobox {
+    background: white;
+    border: 1px solid #ccc;
+    width: 300px;
+    padding: 5px 20px;
+    text-align: justify;
+}
+
+    .vozejkmap-infobox-content {
+        height: 350px;
+        overflow: auto;
+    }
+
+    .vozejkmap-infobox h1 {
+        text-align: left;
+    }
+
+    .vozejkmap-infobox a {
+        color: #b9b9b9;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+    a.vozejkmap-infobox-close {
+        position: absolute;
+        right: 5px;
+        top: 0px;
+    }
+
+    a.vozejkmap-infobox-locate {
+        font-size: 14px;
+        position: absolute;
+        right: 5px;
+        top: 25px;
+    }

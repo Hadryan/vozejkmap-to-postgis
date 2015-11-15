@@ -2,10 +2,11 @@ var M = (function(my) {"use strict";
 
     my.Style = {
         set: function(id) {
-            return my.Style.styles[id] || my.Style.styles["default"];
-        },
+            return styles[id] || styles["default"];
+        }
+    };
 
-        styles: {
+    var styles = {
             "default": {
                 "icon": "ion-help",
                 "markerColor": "blue",
@@ -97,11 +98,7 @@ var M = (function(my) {"use strict";
                 "type": "<i class='ion ion-model-s'></i>Škoda Auto"
             }
         }
-    }
 
-    return {
-        Style: {
-            set: my.Style.set
-        }
-    };
+    return my;
+
 })(M || {});

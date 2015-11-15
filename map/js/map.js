@@ -1,13 +1,19 @@
 var M = (function(my) { "use strict";
-    var basemap, categories = {}, cluster, json, map, mapkey, overlays = {};
-    my.version = "1.0";
+    var basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png"),
+        categories = {},
+        cluster,
+        infobox = new my.Infobox(),
+        json,
+        map,
+        mapkey,
+        overlays = {};
 
-    basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png");
+    my.version = "1.0";
 
     map = L.map("map", {
         center: [49.805, 15.48],
         layers: [basemap],
-        zoom: 8,
+        zoom: 8
     });
 
     // try to locate the user
@@ -39,7 +45,8 @@ var M = (function(my) { "use strict";
                     distance = turf.distance(layer.toGeoJSON(), nearest, "kilometers").toPrecision(2),
                     popup = L.popup({offset: [0, -35]}).setLatLng(e.latlng),
                     content = L.Util.template(
-                        "<h1>{title}</h1><p>{description}</p> \
+                        "<h1>{title}</h1> \
+                        <p>{description}</p> \
                         <p>Nejbližší bod: {nearest} je {distance} km daleko.</p>", {
                         title: feature.properties.title,
                         description: feature.properties.description,
@@ -47,8 +54,15 @@ var M = (function(my) { "use strict";
                         distance: distance
                     });
 
-                popup.setContent(content);
-                popup.openOn(map);
+                try {
+                    map.removeControl(infobox);
+                } catch (e) {
+                    // control not added yet
+                };
+
+                infobox.setLatLng(e.latlng);
+                map.addControl(infobox);
+                infobox.setContent(content);
             });
 
             category = feature.properties.location_type;
