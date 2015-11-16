@@ -21,12 +21,9 @@ html, body {
     overflow: auto;
 }
 
-    .vozejkmap-infobox-content {
-
-    }
-
     .vozejkmap-infobox h1 {
         font-size: 18px;
+        margin-top: 20px;
         text-align: left;
         text-transform: uppercase;
     }
@@ -46,8 +43,8 @@ html, body {
     a.vozejkmap-infobox-locate {
         font-size: 14px;
         position: absolute;
-        right: 5px;
-        top: 25px;
+        left: 5px;
+        top: 0px;
     }
 
 h2.vozejkmap-infobox-nearest-heading {
