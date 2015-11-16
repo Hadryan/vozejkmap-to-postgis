@@ -1,18 +1,37 @@
 var M = (function(my) {"use strict";
 
     my.Style = {
-        set: function(id) {
+        get: function(id) {
             return styles[id] || styles["default"];
+        },
+
+        /**
+         * Returns location type ids
+         * @return {array}
+         */
+        getIds: function() {
+            return Object.keys(styles);
+        },
+
+        /**
+         * Returns location type ids (strongly typed).
+         * Needed for turf.filter
+         * @return {array}
+         */
+        getTypedIds: function() {
+            var ids = this.getIds();
+
+            return ids.map(function(obj) {
+                if (isNaN(obj)) {
+                    return obj;
+                }
+
+                return parseInt(obj);
+            });
         }
     };
 
     var styles = {
-            "default": {
-                "icon": "ion-help",
-                "markerColor": "blue",
-                "prefix": "ion",
-                "type": "<i class='ion ion-help'></i>Neznámý"
-            },
             "1": { // culture
                 "icon": "video-camera",
                 "markerColor": "blue",
@@ -96,6 +115,12 @@ var M = (function(my) {"use strict";
                 "markerColor": "gray",
                 "prefix": "ion",
                 "type": "<i class='ion ion-model-s'></i>Škoda Auto"
+            },
+            "15": {
+                "icon": "ion-help",
+                "markerColor": "blue",
+                "prefix": "ion",
+                "type": "<i class='ion ion-help'></i>Neznámý"
             }
         }
 

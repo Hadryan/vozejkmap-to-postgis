@@ -17,15 +17,18 @@ html, body {
     width: 300px;
     padding: 5px 20px;
     text-align: justify;
+    height: 350px;
+    overflow: auto;
 }
 
     .vozejkmap-infobox-content {
-        height: 350px;
-        overflow: auto;
+
     }
 
     .vozejkmap-infobox h1 {
+        font-size: 18px;
         text-align: left;
+        text-transform: uppercase;
     }
 
     .vozejkmap-infobox a {
@@ -45,4 +48,34 @@ html, body {
         position: absolute;
         right: 5px;
         top: 25px;
+    }
+
+h2.vozejkmap-infobox-nearest-heading {
+    border-bottom: 1px solid #ccc;
+    font-size: 15px;
+    padding-bottom: 3px;
+    text-transform: uppercase;
+}
+
+ul.vozejkmap-infobox-nearest-list {
+    line-height: 23px;
+    list-style: none;
+    padding-left: 0px;
+    text-align: left;
+}
+
+    li.vozejkmap-infobox-nearest-list-item {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    li.vozejkmap-infobox-nearest-list-item:hover,
+    .vozejkmap-infobox a:hover {
+        color: #FF1A00;
+    }
+
+    li.vozejkmap-infobox-nearest-list-item i {
+        display: inline-block;
+        padding-right: 5px;
+        width: 20px;
     }

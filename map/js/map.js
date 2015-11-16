@@ -1,5 +1,5 @@
 var M = (function(my) { "use strict";
-    var basemap = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png"),
+    var basemap = L.tileLayer("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"),
         categories = {},
         cluster,
         infobox = new my.Infobox(),
@@ -38,20 +38,20 @@ var M = (function(my) { "use strict";
         }).setRadius(5).addTo(map);
     });
 
+    map.on("locationerror", function(e) {
+        console.log(e);
+    })
+
     json = L.geoJson(data, {
         onEachFeature: function(feature, layer) {
             layer.on("click", function(e) {
+
                 var nearest = turf.nearest(layer.toGeoJSON(), turf.remove(data, "title", feature.properties.title)),
-                    distance = turf.distance(layer.toGeoJSON(), nearest, "kilometers").toPrecision(2),
-                    popup = L.popup({offset: [0, -35]}).setLatLng(e.latlng),
                     content = L.Util.template(
                         "<h1>{title}</h1> \
-                        <p>{description}</p> \
-                        <p>Nejbližší bod: {nearest} je {distance} km daleko.</p>", {
+                        <p>{description}</p>", {
                         title: feature.properties.title,
                         description: feature.properties.description,
-                        nearest: nearest.properties.title,
-                        distance: distance
                     });
 
                 try {
@@ -62,6 +62,7 @@ var M = (function(my) { "use strict";
 
                 infobox.setLatLng(e.latlng);
                 map.addControl(infobox);
+                infobox.findNearestByCategory(my.Style.getTypedIds());
                 infobox.setContent(content);
             });
 
@@ -75,7 +76,7 @@ var M = (function(my) { "use strict";
         },
 
         pointToLayer: function(feature, position) {
-            return L.marker(position, {icon: L.AwesomeMarkers.icon(my.Style.set(feature.properties.location_type))});
+            return L.marker(position, {icon: L.AwesomeMarkers.icon(my.Style.get(feature.properties.location_type))});
         }
     });
 
@@ -90,8 +91,9 @@ var M = (function(my) { "use strict";
     });
 
     for (var category in categories) {
-        overlays[my.Style.set(category).type] = L.featureGroup.subGroup(cluster, categories[category]);
-        overlays[my.Style.set(category).type].addTo(map);
+        var type = my.Style.get(category).type;
+        overlays[type] = L.featureGroup.subGroup(cluster, categories[category]);
+        overlays[type].addTo(map);
     }
 
     cluster.addTo(map);
